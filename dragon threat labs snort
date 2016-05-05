@@ -1,0 +1,7 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET [80,443] (msg:"MALWARE – DTL ID 21122014 - PcClient beacon"; flow:established,to_server; content:"|BB 4E 4E BC BC BC 7E 7E|"; nocase; offset:160; depth:8; reference:url,http://blog.dragonthreatlabs.com/2015/01/dtl-12012015-01-hong-kong-swc-attack.html; classtype:trojan-activty; sid:YOUR_SID; rev:20122014;)
+
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 (msg:"MALWARE - DTL ID 21122014 - C2 Domain"; content:"|06|aoemvp|03|com"; reference:url,http://blog.dragonthreatlabs.com/2015/01/dtl-12012015-01-hong-kong-swc-attack.html; classtype:trojan-activity; sid:YOUR_SID; rev: 20122014;)
+
+alert ip $HOME_NET any <> 45.64.74.101 any (msg:"MALWARE - DTL ID 21122014 – C2 IP Address"; reference:url,http://blog.dragonthreatlabs.com/2015/01/dtl-12012015-01-hong-kong-swc-attack.html; classtype:trojan-activity; sid:YOUR_SID; rev: 20122014;)
+
+alert ip $HOME_NET any <> 103.229.127.104 any (msg:"MALWARE - DTL ID 21122014 - C2 IP Address "; reference:url,http://blog.dragonthreatlabs.com/2015/01/dtl-12012015-01-hong-kong-swc-attack.html; classtype:trojan-activity; sid:YOUR_SID; rev: 20122014;)

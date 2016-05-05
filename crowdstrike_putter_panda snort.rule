@@ -1,0 +1,104 @@
+#
+#  Putter Panda Snort Rules
+#
+#
+
+	
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg: "CrowdStrike PUTTER PANDA 4H Beacon Message"; \
+  content: "/search5"; http_uri; \
+  content: "?h1="; http_uri; \
+  content: "&h2="; http_uri; \
+  content: "&h3="; http_uri; \
+  content: "&h4="; http_uri; \
+  classtype:trojan-activity; metadata: service http; \
+  sid: 171200702; rev: 20120424;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER_PANDA 3PARA RAT initial beacon - URI"; \
+  flow:to_server, established; \
+  content:"/microsoft/errorpost/default/connect.aspx?ID="; http_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 181311501; rev: 20131212;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA 3PARA RAT initial beacon - Hashed bytes"; \
+  flow:to_server, established; \
+  content:"| c4 65 f1 b3 cf a5 7e e2 c0 1a d4 7f 78 46 26 b5 86 15 f9 34 9c 3d 67 84 6a 48 aa df dc 30 60 24 |"; depth: 2000;\
+  classtype: trojan-activity; \
+  sid: 181311502; rev: 20131212;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA 3PARA RAT data exfiltration";\
+  flow:to_server, established; \
+  content:"POST"; http_method; \
+  content:"/microsoft/errorpost/default.aspx?ID="; http_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 181311503; rev: 20131212;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA 3PARA RAT tasking request";\
+  flow:to_server, established; \
+  content:"GET"; http_method; \
+  content:".aspx?ID="; http_raw_uri; \
+  content: "para1="; http_raw_uri; within: 15\
+  content: "para2="; http_raw_uri; within: 20; \
+  content: "para3="; http_raw_uri; within: 20; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 181311504; rev: 20140421;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA PNGDOWNER user agent"; \
+  flow:to_server, established; \
+  content: "User-Agent: myAgent"; http_header; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 171400101; rev: 20140401;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA HTTPCLIENT Request"; \
+  flow:to_server, established; \
+  content: "/MicrosoftUpdate/ShellEX/KB"; http_uri; \
+  content: "/default.asp?tmp="; within: 35; http_raw_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 171400102; rev: 20140401;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA HTTPCLIENT Request 2"; \
+  flow:to_server, established; \
+  content: "/Microsoft/errorpost"; http_uri; \
+  content: "/default.asp?tmp="; within: 35; http_raw_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 171400103; rev: 20140401;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA HTTPCLIENT Request 3"; \
+  flow:to_server, established; \
+  content: "/MicrosoftUpdate/GetUpdate/KB"; http_uri; \
+  content: "/default.asp?tmp="; within: 35; http_raw_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 171400104; rev: 20140401;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER_PANDA HTTPCLIENT Request 4"; \
+  flow:to_server, established; \
+  content: "/Microsoft/update"; http_uri; \
+  content: "/debug"; http_raw_uri; within: 20; \ 
+  content: "/default.asp?tmp="; within: 30; http_raw_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 171400105; rev: 20140401;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA HTTPCLIENT Request 5"; \
+  flow:to_server, established; \
+  content: "/MicrosoftUpdate/GetFiles/KB"; http_uri; \
+  content: "/default.asp?tmp="; within: 35; http_raw_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 1971400106; rev: 20140401;)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( \
+  msg:"CrowdStrike PUTTER PANDA HTTPCLIENT Request 6"; \
+  flow:to_server, established; \
+  content: "/MicrosoftUpdate/WWRONG/KB"; http_uri; \
+  content: "/default.asp?tmp="; within: 35; http_raw_uri; \
+  classtype: trojan-activity; metadata: service http; \
+  sid: 171400107; rev: 20140401;)
