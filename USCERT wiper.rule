@@ -1,0 +1,70 @@
+######SMB WORM TOOL#####
+
+alert tcp any any -> any any (msg:"Wiper 1"; sid:42000001; rev:1; flow:established; content:"|be 64 ba f2 a8 64|"; depth:6; offset:16; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Wiper 2"; sid:42000002; rev:1; flow:established; content:"|c9 06 d9 96 fc 37 23 5a fe f9 40 ba 4c 94 14 98|"; depth:16; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Wiper 3"; sid:42000003; rev:1; flow:established; content:"|aa 64 ba f2 56|"; depth:50;reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert ip any any -> any any (msg:"Wiper 4"; sid:42000004; rev:1; content:"|aa 74 ba f2 b9 75|"; depth:74;reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any [8000,8080] (msg:"Wiper 5"; sid:42000005; rev:1; flow:established,to_server; dsize:42; byte_test:2,=,40,0,little; content:"|04 00 00 00|"; depth:4; offset:38;reference:url,us-cert.gov/ncas/alerts/TA14-353A;)
+
+######Listening Implant#####
+
+alert tcp any any -> any any (msg:"Listening Implant 1"; sid:42000006; rev:1; flow:established; content:"|0c 1f 1f 1f 4d 5a 4c 4f 50 51 4c 5a 3f 2d 2f 2f 3f 50 54 3e 3e 3e|"; depth:22; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 2"; sid:42000007; rev:1; flow:established; content:"|d3 c4 d2 d1 ce cf d2 c4 a1 b3 b1 b1 a1 ce ca a0 a0 a0|"; depth:18; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert ip any any -> any any (msg:"Listening Implant 3"; sid:42000008; rev:1; content:"|17 08 14 13 67 0f 13 13 17 67 15 02 16 12 02 14 13 78 47 47|"; depth:24; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert ip any any -> any any (msg:"Listening Implant 4"; sid:42000009; rev:1; content:"|4f 50 4c 4b 3f 57 4b 4b 4f 3f 4d 5a 4e 4a 5a 4c 4b 20 1f|"; depth:23; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert ip any any -> any any (msg:"Listening Implant 5"; sid:42000010; rev:1; content:"|15 02 14 17 08 09 14 02 67 75 77 77 67 08 0c 66 66 66|"; depth:22; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 6"; sid:42000011; rev:1; flow:established; content:"|09 22 33 30 28 35 2c|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 7"; sid:42000012; rev:1; flow:established; content:"|13 2f 22 35 22 67 26 35 22 29 27 33 67 28 37 22 29 67 37 28 35 33 34 69|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 8"; sid:42000013; rev:1; flow:established; content:"|43 47 47 47 45 67 47 47 43 47 47 47 44 67 47 47|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 9"; sid:42000014; rev:1; flow:established; content:"|43 47 47 47 42 67 47 47 43 47 47 47 4f 67 47 47 43 47 47 47 43 67 47 47 43 47 47 47 4e 67 47 47|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 10"; sid:42000015; rev:1; flow:established; content:"|d1 ce d2 d5 a1 c9 d5 d5 d1 a1 d3 c4 d0 d4 c4 d2 d5 be|"; depth:18; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 11"; sid:42000016; rev:1; flow:established; content:"|17 08 14 13 67 0f 13 13 17 67 15 02 16 12 02 14 13 78|"; depth:18; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Listening Implant 12"; sid:42000017; rev:1; flow:established; content:"|0c 1f 1f 1f 4f 50 4c 4b 3f 57 4b 4b 4f 3f 4d 5a 4e 4a 5a 4c 4b 20|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+#######Lightweight Backdoor#######
+
+alert tcp any 488 -> any any (msg:"Lightweight Backdoor 1"; sid:42000018; rev:1; flow:established,from_server; content:"|60 db 37 37 37 37 37 37|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any 488 (msg:"Lightweight Backdoor 2"; sid:42000019; rev:1; flow:established,to_server; content:"|60 db 37 37 37 37 37 37|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Lightweight Backdoor 3"; sid:42000020; rev:1; flow:established; content:"|4c 4c|"; depth:2; offset:16; content:"|75 14 2a 2a|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; distance:4; within:4; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Lightweight Backdoor 4"; sid:42000021; rev:1; flow:established; content:"|8a 10 80 c2 67 80 f2 24 88 10|"; fast_pattern:only; content:"|8a 10 80 f2 24 80 ea 67 88 10|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any 488 -> any any (msg:"Lightweight Backdoor 5"; sid:42000022; rev:1; flow:established,from_server; content:"|65 db 37 37 37 37 37 37|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any 488 (msg:"Lightweight Backdoor 6"; sid:42000023; rev:1; flow:established,to_server; content:"|65 db 37 37 37 37 37 37|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any [547,8080,133,117,189,159] -> any any (msg:"Lightweight Backdoor 7"; sid:42000024; rev:1; flow:established,from_server; content:"|7b 08 2a 2a|"; offset:17; content:"|08 2a 2a 01 00|"; distance:0; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Lightweight Backdoor 8"; sid:42000025; rev:1; flow:established; content:"|8a 10 80 ea 62 80 f2 b4 88 10|"; fast_pattern:only; content:"|8a 10 80 f2 b4 80 c2 62 88 10|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Lightweight Backdoor 9"; sid:42000026; rev:1; flow:established; content:"|8a 10 80 c2 4e 80 f2 79 88 10|"; fast_pattern:only; content:"|8a 10 80 f2 79 80 ea 4e 88 10|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Lightweight Backdoor 10"; sid:42000027; rev:1; flow:established; content:"Sleepy!@#qaz13402scvsde890"; fast_pattern:only; content:"BC435@PRO62384923412!@3!"; nocase; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+ 
+######Proxy Tool######
+
+alert tcp any any -> any any (msg:"Proxy Tool 1"; sid:42000028; rev:1; flow:established; content:"|8a 10 80 c2 3a 80 f2 73 88 10|"; fast_pattern:only; content:"|8a 10 80 f2 73 80 ea 3a 88 10|"; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Proxy Tool 2"; sid:42000029; rev:1; flow:established; content:!"HTTP/1"; content:"|e2 1d 49 49|"; depth:4; fast_pattern; content:"|49 49 49 49|"; distance:4; within:4; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+
+alert tcp any any -> any any (msg:"Proxy Tool 3"; sid:42000030; rev:1; flow:established; content:"|82 f4 de d4 d3 c2 ca f5 c8 c8 d3 82 fb f4 de d4 d3 c2 ca 94 95 fb d4 d1 c4 cf c8 d4 d3 89 c2 df c2 87 8a cc 87 00|"; fast_pattern:only; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown;)
+ 
+#######Malware associated with the cyber threat actor#######
+alert tcp any any -> any [8000,8080] (msg:"WIPER4";flow: established, to_server;dsize:42;content:"|28 00|";depth:2;content:"|04 00 00 00|";offset:38;depth:4; reference:url,us-cert.gov/ncas/alerts/TA14-353A; classtype:bad-unknown; sid:123;)

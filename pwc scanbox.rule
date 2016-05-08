@@ -1,0 +1,14 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework Plugin used in WateringHole Attacks"; flow:from_server,established; file_data; content:"=scanbox.info."; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework Java Detection used in WateringHole Attacks"; flow:from_server,established; file_data; content:"\"No Java or Disable"; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework AV Detection used in WateringHole Attacks"; flow:from_server,established; file_data; content:"avg2012check()"; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework  and legitimate websites Flash Detection"; flow:from_server,established; file_data; content:"var flash=function(){}\;flash.prototype.controlVersion=function"; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework Local IP Detection"; flow:from_server,established; file_data; content:"if (evt.candidate) grepSDP(evt.candidate.candidate)"; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework Javscript Keylogging"; flow:from_server,established; file_data; content:"CapsLock=currKey>=65&&currKey<=90"; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"ScanBox Framework Navigator Plugin Detection"; flow:from_server,established; file_data; content:"navigator.plugins[x].filename.replace(/,/g,"; reference:url,pwc.blogs.com/cyber_security_updates/2014/10/scanbox-framework-whos-affected-and-whos-using-it-1.html; classtype:trojan-activity; sid:xxx; rev:1;)
+

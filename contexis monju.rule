@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET 53,80,443,1080 (msg:"gh0st RAT 'HTTPS' variant (aka Backdoor.Miancha)"; flow:established,to_server; content:"HTTPS"; depth:5; rawbytes; reference:url,http://www.contextis.com/documents/30/TA10009_20140127_-_CTI_Threat_Advisory_-_The_Monju_Incident1.pdf; classtype:trojan-activity; sid:xxx; rev:1;)

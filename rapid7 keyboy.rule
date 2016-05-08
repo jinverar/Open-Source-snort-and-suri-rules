@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"KeyBoy Backdoor Login"; flow:to_server; content:"|c4 4c 87 3f 11 1e c4 1a|"; depth:8; sid:1000001; rev:1; classtype:trojan-activity; reference:url,community.rapid7.com/community/infosec/blog/2013/06/07/keyboy-tar geted-attacks-against-vietnam-and-india)

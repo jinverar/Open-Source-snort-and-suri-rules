@@ -1,0 +1,5 @@
+alert tcp any any -> any 80 ( sid:900001; content:”base64_decode”;
+http_client_body;flow:to_server,established; content:”POST”; nocase;
+http_method; ;msg:”Webshell Detected Apache”reference:url,https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-china-chopper.pdf;)
+
+alert tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS (msg: “China Chopper with first Command Detected”; flow:to_server,established; content: “FromBase64String”; content: “z1”; content:”POST”; nocase;http_method; reference:url,http://www.fireeye.com/blog/technical/botnetactivitiesresearch/2013/08/breaking-down-the-china-chopper-web-shell-part-i.html; classtype:web-application-attack; sid: 900000101;)

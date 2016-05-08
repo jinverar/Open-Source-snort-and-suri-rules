@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (msg:”APT LURK communication protocol detected”; flow:established,to_server; content:”|4C 55 52 4B 30|”; depth:5; reference:url,www.commandfive.com/papers/C5_APT_C2InTheFifthDomain.pdf; classtype:trojan-activity; sid:3000006; rev:1;) 

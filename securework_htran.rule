@@ -1,0 +1,8 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"HTran Connection Redirect Failure Message"; 
+flow:established,from_server; dsize:<80; content:"|5b|SERVER|5d|connection|20|to|20|"; depth:22; 
+reference:url,www.secureworks.com/research/threats/htran/; sid:1111111111;) 
+
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"HTran Connection Redirect Failure Message 
+(Unicode)"; flow:established,from_server; dsize:<160; content:"|5b00|S|00|E|00|R|00|V|00|E|00|R|
+005d00|c|00|o|00|n|00|n|00|e|00|c|00|t|00|i|00|o|00|n|002000|t|00|o|002000|"; depth:44; 
+reference:url,www.secureworks.com/research/threats/htran/; sid:1111111112;)
