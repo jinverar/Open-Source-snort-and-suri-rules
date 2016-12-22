@@ -1,0 +1,1 @@
+alert tcp any any -> any $HTTP_PORTS (msg:"--[PwC CTD]-- OnePHP - Tendrit Initial URI"; flow:established,from_client; urilen:>14; content:"/css.ashx?nly="; http_uri; depth:14; pcre:"/^\/css\.ashx\?nly=[a-z=&%]{1,500}$/U"; reference:md5,7db13f7ba706885c31fb91eb35e9dabb; sid:xxxxxxxx; rev:1; classtype:trojan-activity;)

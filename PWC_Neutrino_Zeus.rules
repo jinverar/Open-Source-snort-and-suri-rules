@@ -1,0 +1,14 @@
+
+alert http any any <> any any (msg:"[PwC] eCrime Neutrino DDoS tool 2nd Stage implant download (acez.exe)"; flow:established,from_client; content:"/forum/acez.exe"; http_uri; isdataat:!1,relative; sid:30000001; rev:2015060401;)
+
+alert tcp any any <> any any (msg:"[PwC] eCrime Neutrino DDoS tool 2nd Stage implant download (acez.exe)"; flow:established,from_client; content:"/forum/acez.exe"; http_uri; isdataat:!1,relative; sid:30000001; rev:2015060401;)
+
+alert http any any <> any any (msg:"[PwC] Zeus C&C domain (stat777)"; flow:established,from_client; content:"stat777-toolbarueries-google.com"; http_host; isdataat:!1,relative; classtype:trojan-activity; sid:30000002; rev:2015060501;)
+
+alert dns any any <> any any (msg:"[PwC] Zeus C&C domain (stat777)"; flow:established,from_client; dns_query; content:"stat777-toolbarueries-google.com"; isdataat:!1,relative; classtype:trojan-activity; sid:30000003; rev:2015060501;)
+
+alert tcp any any <> any any (msg:"[PwC] Zeus C&C domain (stat777)"; flow:established,from_client; content:"stat777-toolbarueries-google.com"; http_header; isdataat:!1,relative; classtype:trojan-activity; sid:30000002; rev:2015060501;)
+
+alert udp any any <> any 53 (msg:"[PwC] Zeus C&C domain (stat777)"; flow:established,from_client;  content:"|1C|stat777-toolbarueries-google|03|com"; nocase; classtype:trojan-activity; sid:30000003; rev:2015060501;)
+
+alert tcp any any <> any 53 (msg:"[PwC] Zeus C&C domain (stat777)"; flow:established,from_client; content:"|1C|stat777-toolbarueries-google|03|com"; nocase; classtype:trojan-activity; sid:30000003; rev:2015060501;)
