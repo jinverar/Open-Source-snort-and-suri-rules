@@ -1,0 +1,5 @@
+alert tcp any any <> 199.188.204.182 21 (msg: "TargetBreach Exfil C2"; reference:url,https://www.crowdstrike.com/blog/actionable-indicators-detection-signs-compromise-target-related-breaches/; sid: xxx;)
+
+alert tcp any any <> 50.87.167.144 21 (msg: "TargetBreach Exfil C2"; reference:url,https://www.crowdstrike.com/blog/actionable-indicators-detection-signs-compromise-target-related-breaches/; sid: xxx;)
+
+alert tcp any any <> 63.111.113.99 21 (msg: "TargetBreach Exfil C2"; reference:url,https://www.crowdstrike.com/blog/actionable-indicators-detection-signs-compromise-target-related-breaches/; sid: xxx;)

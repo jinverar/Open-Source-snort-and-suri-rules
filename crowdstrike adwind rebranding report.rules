@@ -1,0 +1,3 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg: “[CrowdStrike] –RECOMM/Adwind Default Password Auth”;flow: to_server, established;content: “|00||28|e3a8809017dd76bd26557a5b923ab2ae16c0cdb3”; reference:url,https://www.crowdstrike.com/blog/adwind-rat-rebranding/; sid: 1981310201; rev: 20131115)
+
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg: “[CrowdStrike] –RECOMM/Adwind Ping/Pong”;flow: to_server, established; dsize: 1024;content: “|00 00 53 09 58 58 58 58|”; depth: 16;content: “|58 58 58 58 58 58 58 58 58 58 58 58 58 58 58 58|”; offset: 1008; reference:url,https://www.crowdstrike.com/blog/adwind-rat-rebranding/; sid: 1981310202; rev: 20131115)
