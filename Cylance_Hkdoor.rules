@@ -1,0 +1,4 @@
+alert tcp any any -> $(HOME_NET) any (msg:"HKDOOR Login attempt"; content:"NCLOGIN hkdoorpass"; flags:AP; sid:10000001;)
+alert tcp any any -> $(HOME_NET) any (msg:"HKDOOR Login attempt"; content:"NCLOGIN ----------"; flags:AP; sid:10000002;)
+alert tcp any any -> $(HOME_NET) any (msg:"HKDOOR Login attempt"; content:"/91UIi/ussssssssss"; flags:AP; sid:10000003;)
+alert tcp any any -> $(HOME_NET) any (msg:"HKDOOR Login attempt"; content:"/91UIi/uq3,``K]kQQ"; flags:AP; sid:10000004;)
