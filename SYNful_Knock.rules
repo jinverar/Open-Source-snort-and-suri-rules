@@ -1,0 +1,3 @@
+alert tcp any any -> any any (msg: "SYNful Knock Cisco Implant HTTP Header"; flow: from_server; content: "HTTP/1.1 200 OK|0d 0a|Server: Apache/2.2.17 (Ubuntu)|0d 0a|X-Powered-By: PHP/5.3.5-1ubuntu7.7|0d 0a|Keep-Alive: timeout=15, max=100|0d 0a|Connection: Keep-Alive|0d 0a|Content-Type: text/html|0d 0a 0d 0a|<html><body><div>"; offset:0; flags:PA; sid:201504232;)
+
+alert tcp any any -> any any (msg: "SYNful Knock Cisco Implant HTTP Request"; flow: to_server; content: "text"; offset:78; depth:4; content: "|00 00 00|"; offset: 83; depth: 3; content: "|45 25 6d|"; offset: 87; depth: 3; sid:201504233;)
